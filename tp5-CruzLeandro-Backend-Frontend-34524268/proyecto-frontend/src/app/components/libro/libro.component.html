@@ -1,0 +1,39 @@
+<div class="container" *ngIf="!libro else destac">
+    <img src="../../../assets/cargando.gif" class="rounded mx-auto d-block" alt="...">
+</div>
+
+
+<ng-template #destac>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-2">
+                <div id="carouselExampleCaptions" class="carousel slide m-4 p-4" data-bs-ride="carousel">
+                    <div class="carousel-inner" >
+                        <div class="carousel-item active">
+                            <img src="{{libro.imagen}}" style="border-radius: 40px; box-shadow: 2px 8px 10px rgba(0, 0, 0, 0.7);" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h2 class="">{{libro.titulo}}</h2>
+                                <p class="" style="font-size: 25px; font-family: cursive;">{{libro.descripcion}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev "  type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" (click)="retroceder()">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" (click)="avanzar()">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</ng-template>
+<div class="row">
+    <div class="d-grid gap-2 col-6 mx-auto pb-4">
+        <button class="btn btn-outline-warning" type="button" routerLink="/libro-form">Nuevo Libro</button>
+    </div>
+</div>
+

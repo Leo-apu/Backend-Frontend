@@ -1,0 +1,22 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+.cotizacion td {
+    color: rgb(67, 127, 255);
+}
+.divisas select{
+        color: #000;
+}
+.col{
+    margin-top: 20px;
+}
+label{
+    color: white;
+    font-size: 22px;
+}
+h1,h2,h3,h4,h5, button{
+    font-family: 'Bitter', serif;
+
+}
+.card-header{
+    background-color: rgb(10, 10, 131);
+    color: white;
+}

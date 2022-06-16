@@ -1,0 +1,96 @@
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row container m-2 bg-light" >
+        <section class="col-lg-8 col-md-8 d-none d-md-block mt-1">
+            <div class="input-group mb-3 mt-3">
+                <select class="form-select" id="monedaOrigen"  [(ngModel)]="origen" name="monedaOrigen">
+                    <option hidden value="" disabled selected>Moneda Origen</option>
+                    <option [value]="mO.monedaOrigen" *ngFor="let mO of transacciones">{{mO.monedaOrigen}}</option>
+                </select>
+                <select class="form-select" id="monedaDestino" [(ngModel)]="destino" name="monedaDestino">
+                    <option hidden value="" disabled selected>Moneda Destino</option>
+                    <option [value]="mD.monedaDestino" *ngFor="let mD of transacciones">{{mD.monedaDestino}}</option>
+                </select>
+                <select class="form-select" id="email"  [(ngModel)]="email" name="email">
+                    <option hidden value="" disabled selected>email</option>
+                    <option [value]="e.emailCliente" *ngFor="let e of transacciones">{{e.emailCliente}}</option>
+                </select>
+                <button class="btn btn-success" type="button" (click)="filtrar()" name="filtrar">Filtrar</button>
+                <button class="btn btn-warning" type="button" (click)="mostrarTransacciones()" name="mostrarTodas">Mostrar Todos</button>
+            </div>
+            <div class="table-responsive border-primary">
+                <table class="table  table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">Email Cliente</th>
+                            <th scope="col">Moneda Origen</th>
+                            <th scope="col">Cantidad Origen</th>
+                            <th scope="col">Moneda Destino</th>
+                            <th scope="col">Tasa de Cambio</th>
+                            <th scope="col">Cantidad Destino</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let t of transacciones" class="text-center">
+                            <th scope="row">{{t.emailCliente}}</th>
+                            <td>{{t.monedaOrigen }}</td>
+                            <td>{{t.cantidadOrigen| number: "1.6-6"}}</td>
+                            <td>{{t.monedaDestino}}</td>
+                            <td>{{t.tasaConversion | number: "1.6-6"}}</td>
+                            <td>{{t.cantidadDestino| number: "1.6-6"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <aside class="col-lg-4 col-md-4 col-sm-12 p-2">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="card p-0 shadow-lg bg-primary">
+                            <div class="card-header p-1 text-center border-white fs-3">Conversor de Divisas</div>
+                            <div class="card-body">
+                                <form class="divisas">
+                                        <div class="form-row mb-3 ">
+                                            <label for="cantidad" class="form-label">Cantidad</label>
+                                            <input [(ngModel)]="conversion.fromvalue" type="text" class="form-control text-right" id="cantidad" placeholder="Cantidad" name="cantidad">
+                                        </div>
+                                        <div class="form-row mb-3">
+                                            <label for="desde" class="form-label ">De</label>
+                                            <select [(ngModel)]="conversion.fromtype" id="desde" class="form-select" name="desde">
+                                                <option hidden value="" disabled selected> Moneda Origen</option>
+                                                <option value="USD">USD Dolares EEUU</option>
+                                                <option value="ARS">ARS Pesos Argentinos</option>
+                                                <option value="EUR">EUR Euros</option>
+                                                <option value="BTC">BTC Bitcoins</option>
+                                                <option value="GBP">GBP Libras</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-row mb-3">
+                                            <label for="hasta" class="form-label">A</label>
+                                            <select  [(ngModel)]="conversion.totype" id="hasta" class="form-select" name="hasta">
+                                                <option hidden value="" disabled selected>Moneda Destino</option>
+                                                <option value="USD">USD Dolares EEUU</option>
+                                                <option value="ARS">ARS Pesos Argentinos</option>
+                                                <option value="EUR">EUR Euros</option>
+                                                <option value="BTC">BTC Bitcoins</option>
+                                                <option value="GBP">GBP Libras</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-row mb-3 ">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input [(ngModel)]="conversion.email" type="text" class="form-control text-right" id="email" placeholder="email" name="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea disabled class="form-control " id="exampleFormControlTextarea1" rows="1">{{resultado}}</textarea>
+                                        </div>
+                                        <div class="row ">
+                                            <button (click)="convertir()" type="submit" [disabled]="conversion.email=== ''" class="btn btn-warning "> Convertir <i class="bi bi-arrow-right"></i> </button>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+        </aside>
+    </div>
+</div>

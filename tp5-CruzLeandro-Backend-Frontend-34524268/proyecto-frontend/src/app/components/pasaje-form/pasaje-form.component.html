@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card mt-3 mb-3">
+                <div class="card-body text-center">
+                    <span class="titulo">{{titulo | uppercase}}</span>
+                    <form #pasajeForm="ngForm">
+                        <div class="mb-3">
+                            <label for="dnipasajero" class=""> Nombre y DNI:</label>
+                            <select type="text "class="form-control mb-2" id="dnipasajero" required [(ngModel)]="venta.pasajero"  name="dnipasajero"  placeholder="ingrese DNI"   #dnipasajero="ngModel" required>
+                                <option [ngValue]="p._id" *ngFor="let p of personas" >{{p.nombre}}  --  {{p.nro_documento}}</option>
+                            </select> 
+                            <div [hidden]="dnipasajero.dirty" class="alert alert-danger">
+                                <Span>El Dni es requerido</Span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class=""> Fecha de Compra:</label>
+                            <input [(ngModel)]="venta.fechaCompra" type="date" name="fecha" class="form-control"  placeholder="ingrese Fecha" required #fecha="ngModel"/>
+                            <div [hidden]="fecha.dirty" class="alert alert-danger">
+                                <Span>La fecha es requerido</Span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class=""> Precio:</label>
+                            <input [(ngModel)]="venta.precioPasaje" type="number" id="precio" name="precio" class="form-control mb-2" placeholder="ingrese valor del pasaje" #precio="ngModel" required/>   
+                            <div [hidden]="precio.valid || (precio.dirty || precio.untouched)" class="alert alert-danger" role="alert">
+                                <span>El Precio del Pasaje es Requerido</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="categoria" class=""> Categor&iacute;a:</label>
+                            <select [(ngModel)]="venta.categoriaPasajero" (ngModelChange)="calcularDescuento()"type="text" name="categoria" class="form-control" #categoria="ngModel" required>
+                                <option [value]="p.id" *ngFor="let p of cat">{{p.name}}</option>
+                            </select>
+                            <div [hidden]="categoria.dirty" class="alert alert-danger">
+                                <Span>La Categoria del Pasajero es requerido</Span>
+                            </div>
+                        </div>
+                        <div class="text-black bg-warning bg-gradient col-lg-6 fs-5" *ngIf="mostrarDescuento"> 
+                            Descuento: {{descuento |currency:'$'}}
+                        </div>
+                        <div class="text-black bg-warning bg-gradient col-lg-6 fs-5" *ngIf="mostrarDescuento">
+                            Precio Total: {{precioActual | currency:'$'}}
+                        </div>
+                        <div class="m-auto pt-4 pb-3">
+                            <button [disabled]="pasajeForm.form.invalid" type="submit" class="btn btn-success fs-4 " (click)="resulTotal()" (click)="agregPasaje()" *ngIf="accion==='nuevo'">Guardar</button>
+                            <button type="button" class="btn btn-warning ml-3 fs-4 float-start"(click)="modificarPasaje()" (click)="limpiarVentas()" *ngIf="accion==='actualizar'">Modificar</button>
+                            <button type="button" class="btn btn-outline-danger fs-4 float-end" routerLink="/pasaje">Volver</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

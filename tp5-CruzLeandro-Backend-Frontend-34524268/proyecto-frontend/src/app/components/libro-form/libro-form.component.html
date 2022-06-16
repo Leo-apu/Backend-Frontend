@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-3">
+            <div class="card mt-3 mb-3">
+                <div class="card-body">
+                    <h2 class="titulo text-center">Crear Libro</h2>
+                    <form #libroForm="ngForm" >                
+                        <div class="mb-3">
+                            <input type="text" [(ngModel)]="libro.titulo" name="titulo" class="form-control" placeholder="Titulo" #titulo="ngModel" required>
+                            <div [hidden]="titulo.valid || (titulo.dirty || titulo.untouched)" class="alert alert-danger" role="alert">
+                                <span>El Titulo del Libro es Requerido</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <textarea  [(ngModel)]="libro.descripcion" name="descripcion" class="form-control" rows="2" placeholder="Descripcion" #descripcion="ngModel" required></textarea>
+                            <div [hidden]="descripcion.valid || (descripcion.dirty || descripcion.untouched)" class="alert alert-danger" role="alert">
+                                <span>La Descripcion del Libro es Requerida</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="stock" name="stock" [(ngModel)]="libro.stock" placeholder="Stock" #stock="ngModel" required>
+                            <div [hidden]="stock.valid || (stock.dirty || stock.untouched)" class="alert alert-danger" role="alert">
+                                <span>El Stock del Libro es Requerido</span>
+                            </div>
+                        </div>
+                        <!-- <div class="mb-3 w-25 mx-auto d-block ">
+                            <input  type="file" class="d-none"  >
+                            <img src="../../../assets/no-imagen.png" class="img-fluid pe-auto " alt="Sin Imagen" >
+                        </div> -->
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="imagen" name="imagen" [(ngModel)]="libro.imagen" placeholder="Imagen URL" #imagen="ngModel" required>
+                            <div [hidden]="imagen.valid || (imagen.dirty || imagen.untouched)" class="alert alert-danger" role="alert">
+                                <span>La URL de la portada del Libro es Requerido</span>
+                            </div>
+                        </div>
+                            <fieldset class="row mb-3">
+                            <legend class="col-form-label col-sm-5 pt-0 text-end">Valoracion</legend>
+                            <div class="col-sm-7 d-flex align-content-center">
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="libro.destacado" name="destacado" id="gridRadios1">
+                                <label class="form-check-label" for="gridRadios1">
+                                    Destacado
+                                </label>
+                                
+                                </div>
+                            </div>
+                            </fieldset>
+                            <div class="mx-3 pt-4 pb-3">
+                                <button  [disabled]="libroForm.form.invalid"type="submit" class="btn btn-success  mr-3 fs-4 float-start" (click)="guardarLibro()">Guardar</button>                
+                                <button type="button" class="btn btn-outline-danger ml-3 fs-4 float-end" routerLink="/libros">Volver</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

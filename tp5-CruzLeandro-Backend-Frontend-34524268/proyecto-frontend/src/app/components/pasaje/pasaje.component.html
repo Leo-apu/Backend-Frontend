@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card mt-3 mb-3">
+                <div class="card-body text-center">
+                    <span class="titulo">PASAJES</span>
+                    <button class="btn btn-success float-end" routerLink="/pasaje-form">Nuevo Pasaje</button>
+                    <div class="input-group g-3 mb-3 mt-4">
+                        <span class="mx-3 text-dark">Categoria a Filtrar</span>
+                        <select [(ngModel)]="cate" type="text" name="categoria" class="form-control">
+                            <option [value]="p.id" *ngFor="let p of cat">{{p.name}}</option>
+                        </select>
+                        <button class="btn btn-success" type="button" [disabled]="cate === ''" (click)="filtrar()" name="filtrar">Filtrar</button>
+                        <button class="btn btn-warning" type="button" [disabled]="cate === ''" (click)="mostrarTodo()" name="mostrarTodas">Mostrar Todos</button>
+                    </div>
+                    <table class="table border-primary table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">DNI Pasajero</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Fecha de Compra</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr *ngFor="let p of pasajes">
+                                <th scope="row">{{p.pasajero.nro_documento}}</th>
+                                <td>{{p.precioPasaje | currency}}</td>
+                                <td>{{p.categoriaPasajero}}</td>
+                                <td>{{p.fechaCompra | date:'dd/MM/yyyy' }}</td>
+                                <td><div class="btn-group">
+                                    <button  class="btn btn-success"(click)="editar(p._id)"  [routerLink]="['/pasaje-form',p._id]" >Modificar</button>
+                                    <button type="button" class="btn btn-danger" (click)="eliminarPasaje(p._id)" >Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
